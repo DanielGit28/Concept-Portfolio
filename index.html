@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#2b1c14;overscroll-behavior-y:none}
+*{box-sizing:border-box}
+a{color:#7a3f1d}
+a:hover{color:#c05a17}
+@keyframes bobHint{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes tapeIn{from{opacity:0;transform:translateY(26px) rotate(-1.6deg) scale(.97)}to{opacity:1;transform:translateY(0) rotate(-1.1deg) scale(1)}}
+[data-stage]{max-height:min(600px,calc(100vh - 110px));overflow-y:auto;scrollbar-width:thin;scrollbar-color:#c39a63 transparent}
+[data-stage]::-webkit-scrollbar{width:7px}
+[data-stage]::-webkit-scrollbar-thumb{background:#c39a63;border-radius:6px}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;width:100%;height:100vh;overflow:hidden;touch-action:none;cursor:grab">
+
+<div ref="{{ hostRef }}" style="position:absolute;inset:0;z-index:0"></div>
+
+<div ref="{{ overlayRef }}" style="position:absolute;inset:0;z-index:2;pointer-events:none;font-family:Karla,system-ui,sans-serif">
+
+<div style="position:absolute;top:0;left:0;right:0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:20px 22px">
+<div style="pointer-events:auto;background:#efe0c0;border:2px solid #6d4526;border-radius:12px;padding:10px 16px 11px;box-shadow:0 6px 0 #6d4526,0 14px 26px rgba(0,0,0,.4);transform:rotate(-1.2deg)">
+<div style="font:400 21px/1 'Bree Serif',serif;color:#43230f;letter-spacing:-.01em">Daniel Zúñiga Rojas</div>
+<div style="margin-top:5px;font:700 10.5px/1 Karla,sans-serif;letter-spacing:.18em;color:#8a5a34">SOFTWARE ENGINEER · COSTA RICA</div>
+</div>
+<div style="display:flex;gap:9px;pointer-events:auto">
+<a href="mailto:duniel12@gmail.com" style="display:flex;align-items:center;height:46px;padding:0 17px;background:#e0762a;border:2px solid #6d4526;border-radius:10px;box-shadow:0 5px 0 #6d4526;font:700 11.5px Karla,sans-serif;letter-spacing:.14em;color:#2b1408;text-decoration:none">EMAIL</a>
+<a href="assets/CV-DanielZuniga.pdf" download="Daniel-Zuniga-Rojas-CV.pdf" style="display:flex;align-items:center;height:46px;padding:0 17px;background:#efe0c0;border:2px solid #6d4526;border-radius:10px;box-shadow:0 5px 0 #6d4526;font:700 11.5px Karla,sans-serif;letter-spacing:.14em;color:#43230f;text-decoration:none">CV</a>
+</div>
+</div>
+
+<div ref="{{ cardsRef }}" style="position:absolute;left:26px;bottom:26px;width:436px;max-width:calc(100% - 52px)">
+
+<div data-stage="0" style="position:absolute;left:0;bottom:0;width:100%;opacity:0;background:#efe0c0;border:2px solid #6d4526;border-radius:14px;padding:9px;box-shadow:0 8px 0 #6d4526,0 22px 42px rgba(0,0,0,.45);transform:rotate(-1.1deg)">
+<div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 01 · FOUNDATION</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">2020 – 2024</div></div>
+<div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">CENFOTEC University</div>
+<div style="margin-top:4px;font:700 13px Karla,sans-serif;color:#8a5a34">BSc Software Engineering · San José</div>
+<div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Graduated with honors, GPA 3.5, and took the ExpoCenfo Best Project Showcase award for two separate projects.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Four years of fundamentals: architecture, databases, distributed systems, and the first production code I ever shipped.</div>
+</div>
+<div style="margin-top:15px;display:flex;flex-wrap:wrap;gap:6px">
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">HONORS</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">2× BEST PROJECT</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">KUBERNETES, 2026</span>
+</div>
+</div>
+</div>
+
+<div data-stage="1" style="position:absolute;left:0;bottom:0;width:100%;opacity:0;background:#efe0c0;border:2px solid #6d4526;border-radius:14px;padding:9px;box-shadow:0 8px 0 #6d4526,0 22px 42px rgba(0,0,0,.45);transform:rotate(-1.1deg)">
+<div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 02 · PROJECT</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">JAN – MAY 2024</div></div>
+<div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">Tripnary</div>
+<div style="margin-top:4px;font:700 13px Karla,sans-serif;color:#8a5a34">AI-powered travel recommendation platform</div>
+<div data-gallery='[{"src":"assets/trip-welcome.png","alt":"Tripnary onboarding screen","cap":"Onboarding — brand, promise, illustration, nothing else."},{"src":"assets/trip-interests.png","alt":"Tripnary interests screen","cap":"Preference capture — trip type, destination and season feed the recommendation prompt."},{"src":"assets/trip-destinations.png","alt":"Tripnary destinations screen","cap":"Destinations browsed by continent, each card opening into planning."},{"src":"assets/trip-itinerary.png","alt":"Tripnary itinerary screen","cap":"Day-by-day itinerary with a map, and an empty state that says what to do next."},{"src":"assets/trip-menu.png","alt":"Tripnary account menu screen","cap":"Account drawer — trips, wishlist, messages, calendar."},{"src":"assets/trip-login.png","alt":"Tripnary login screen","cap":"Sign in, with Google as the fast path."}]' style="margin-top:12px">
+<div style="position:relative;border-radius:8px;overflow:hidden;border:2px solid #c39a63;box-shadow:0 3px 0 rgba(109,69,38,.22);background:#2b1c14">
+<img data-g-img src="assets/trip-welcome.png" alt="Tripnary onboarding screen" style="display:block;width:100%;height:190px;object-fit:cover;object-position:top">
+<button type="button" data-g-prev aria-label="Previous image" style="position:absolute;left:7px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.94);cursor:pointer;font:700 16px Karla,sans-serif;color:#6d4526;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">‹</button>
+<button type="button" data-g-next aria-label="Next image" style="position:absolute;right:7px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.94);cursor:pointer;font:700 16px Karla,sans-serif;color:#6d4526;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">›</button>
+<div data-g-count style="position:absolute;right:8px;bottom:7px;font:700 10px Karla,sans-serif;color:#f7f3ec;background:rgba(61,35,15,.7);padding:3px 8px;border-radius:20px">1 / 6</div>
+<div style="position:absolute;left:8px;top:7px;font:700 9.5px Karla,sans-serif;letter-spacing:.06em;color:#f7f3ec;background:rgba(61,35,15,.7);padding:3px 8px;border-radius:20px;pointer-events:none">⤢ TAP TO ENLARGE</div>
+</div>
+<div data-g-cap style="margin-top:6px;font:400 12px/1.45 Karla,sans-serif;color:#8a5a34;min-height:32px">Onboarding — brand, promise, illustration, nothing else.</div>
+</div>
+<div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Kotlin Android application with a Node.js backend: authentication, live chat over WebSockets, and AI recommendations for restaurants, accommodations, attractions, personalized itineraries and trip sharing.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Integrated the OpenAI GPT-4.5 API directly, tuning prompt design, token consumption and response time to keep recommendations fast and relevant.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">One of the two ExpoCenfo Best Project Showcase winners — designed and built with StellarSoft, the student team.</div>
+</div>
+<div style="margin-top:15px;display:flex;flex-wrap:wrap;gap:6px">
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">KOTLIN</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">NODE.JS</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">POSTGRESQL</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">WEBSOCKETS</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">GPT-4.5</span>
+</div>
+</div>
+</div>
+
+<div data-stage="2" style="position:absolute;left:0;bottom:0;width:100%;opacity:0;background:#efe0c0;border:2px solid #6d4526;border-radius:14px;padding:9px;box-shadow:0 8px 0 #6d4526,0 22px 42px rgba(0,0,0,.45);transform:rotate(-1.1deg)">
+<div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 03 · ROLE</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">MAR – NOV 2024</div></div>
+<div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">West Monroe</div>
+<div style="margin-top:4px;font:700 13px Karla,sans-serif;color:#8a5a34">Software Engineer II · Remote</div>
+<div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Led the migration of 20+ enterprise applications after a corporate acquisition, inside a six-month timeline.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Built a multi-tenant Angular application monitoring deployment pipelines across enterprise clients.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Built deployment automation from the ground up with Azure DevOps, PowerShell, SSIS, SSRS and Power BI, reducing deployment times by 25% while increasing reliability.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Collaborated on critical fixes to enterprise financial systems, helping resolve high-impact issues that prevented multi-million-dollar operational losses.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Integrated Stripe, Contentful, Tealium, Braze, Mitek and Experian for payments, identity verification, analytics and marketing automation — cutting catalog and checkout load times by 30% on AutoNation's vehicle rental platform.</div>
+</div>
+<div style="margin-top:15px;display:flex;flex-wrap:wrap;gap:6px">
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">ANGULAR</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">C#/.NET</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">AZURE DEVOPS</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">STRIPE</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">POWER BI</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">CONTENTFUL</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">EXPERIAN</span>
+</div>
+</div>
+</div>
+
+<div data-stage="3" style="position:absolute;left:0;bottom:0;width:100%;opacity:0;background:#efe0c0;border:2px solid #6d4526;border-radius:14px;padding:9px;box-shadow:0 8px 0 #6d4526,0 22px 42px rgba(0,0,0,.45);transform:rotate(-1.1deg)">
+<div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 04 · NOW</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">DEC 2024 – PRESENT</div></div>
+<div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">IBM</div>
+<div style="margin-top:4px;font:700 13px Karla,sans-serif;color:#8a5a34">Semi-senior Software Engineer · Heredia, Costa Rica</div>
+<div data-gallery='[{"src":"assets/ibm-risk-score.jpg","alt":"IBM AI risk score","cap":"AI risk score on new account cases — explains itself in place and in the case panel."},{"src":"assets/ibm-dashboard.jpg","alt":"IBM fraud metrics dashboard","cap":"Metrics dashboard — KPI cards, then volume, lifecycle and queue distribution charts."},{"src":"assets/ibm-callbacks.jpg","alt":"IBM callbacks queue","cap":"Callbacks queue — status as the primary signal, with pending, overdue and scheduled filters."},{"src":"assets/ibm-artifacts.jpg","alt":"IBM case artifacts","cap":"Case artifacts, in-network and out, with routing detail and per-artifact lookups."},{"src":"assets/ibm-presets.jpg","alt":"IBM accessibility presets","cap":"Highlighted-text presets, including a colourblind/accessibility preset for header analysis."}]' style="margin-top:12px">
+<div style="position:relative;border-radius:8px;overflow:hidden;border:2px solid #c39a63;box-shadow:0 3px 0 rgba(109,69,38,.22);background:#2b1c14">
+<img data-g-img src="assets/ibm-risk-score.jpg" alt="IBM AI risk score" style="display:block;width:100%;height:190px;object-fit:cover;object-position:top">
+<button type="button" data-g-prev aria-label="Previous image" style="position:absolute;left:7px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.94);cursor:pointer;font:700 16px Karla,sans-serif;color:#6d4526;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">‹</button>
+<button type="button" data-g-next aria-label="Next image" style="position:absolute;right:7px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.94);cursor:pointer;font:700 16px Karla,sans-serif;color:#6d4526;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">›</button>
+<div data-g-count style="position:absolute;right:8px;bottom:7px;font:700 10px Karla,sans-serif;color:#f7f3ec;background:rgba(61,35,15,.7);padding:3px 8px;border-radius:20px">1 / 5</div>
+<div style="position:absolute;left:8px;top:7px;font:700 9.5px Karla,sans-serif;letter-spacing:.06em;color:#f7f3ec;background:rgba(61,35,15,.7);padding:3px 8px;border-radius:20px;pointer-events:none">⤢ TAP TO ENLARGE</div>
+</div>
+<div data-g-cap style="margin-top:6px;font:400 12px/1.45 Karla,sans-serif;color:#8a5a34;min-height:32px">AI risk score on new account cases — explains itself in place and in the case panel.</div>
+</div>
+<div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Own end-to-end feature delivery across IBM Cloud Fraud and Abuse platforms, with PMs, architects, QA and fraud analysts.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Sole UI/UX designer for both platforms: Figma prototypes, user flows, and the design system the teams build against.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Shipped a complete Fraud Profiles module from concept to production — UX, React Context architecture, backend APIs and PostgreSQL integration.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Redesigned dashboards, forms, tables, filtering and responsive layouts to improve analyst productivity, partnering with solution architects on frontend architecture including React Context state management at scale.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Contribute to IBM Cloud infrastructure initiatives: configuring deployment pipelines, migrating workloads to OnePipeline, and improving operational workflows.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Designed AI-assisted fraud investigation experiences built on Large Language Models — prototyping dashboards, case views and artifact tables focused on response clarity and analyst productivity, alongside the engineering conversation on latency and token optimization.</div>
+</div>
+<div style="margin-top:15px;display:flex;flex-wrap:wrap;gap:6px">
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">REACT</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">NODE.JS</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">POSTGRESQL</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">IBM CLOUD</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">FIGMA</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">LLMs</span>
+</div>
+</div>
+</div>
+
+<div data-stage="4" style="position:absolute;left:0;bottom:0;width:100%;opacity:0;background:#efe0c0;border:2px solid #6d4526;border-radius:14px;padding:9px;box-shadow:0 8px 0 #6d4526,0 22px 42px rgba(0,0,0,.45);transform:rotate(-1.1deg)">
+<div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 05 · MASTER'S</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">JAN – NOV 2025</div></div>
+<div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">EUDE Business School</div>
+<div style="margin-top:4px;font:700 13px Karla,sans-serif;color:#8a5a34">MSc Business Intelligence &amp; Big Data Analytics · Madrid, online</div>
+<div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">1,125 hours, 45 ECTS credits, graduated with honors and a GPA of 3.5.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Data mining and modelling under CRISP-DM: predictive and classification models, association rules, clustering, discriminant analysis, linear and logistic regression, decision trees, neural networks, text analysis and cross-validation.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Big Data architecture across the data, information and knowledge levels — from ETL pipelines through to AI and cognitive systems.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Data-driven culture and Data by Design, AI and virtual assistants, web analytics, and information security and privacy. Closed with a Master's final project.</div>
+</div>
+<div style="margin-top:15px;display:flex;flex-wrap:wrap;gap:6px">
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">CRISP-DM</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">PREDICTIVE MODELS</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">NEURAL NETWORKS</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">BIG DATA ARCHITECTURE</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">DATA GOVERNANCE</span>
+<span style="font:700 10.5px Karla,sans-serif;letter-spacing:.08em;color:#6d4526;background:#e2cfa6;border:1.5px solid #c39a63;border-radius:20px;padding:5px 11px;white-space:nowrap">CYBERSECURITY</span>
+</div>
+</div>
+</div>
+
+<div data-stage="5" style="position:absolute;left:0;bottom:0;width:100%;opacity:0;background:#efe0c0;border:2px solid #6d4526;border-radius:14px;padding:9px;box-shadow:0 8px 0 #6d4526,0 22px 42px rgba(0,0,0,.45);transform:rotate(-1.1deg)">
+<div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 06 · BUILDING NOW</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">2026 – PRESENT</div></div>
+<div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">WI-TP</div>
+<div style="margin-top:4px;font:700 13px Karla,sans-serif;color:#8a5a34">Webhook Ingestion &amp; Transformation Pipeline · live in production</div>
+<div data-gallery='[{"src":"assets/witp-pipeline.png","alt":"WI-TP live pipeline console","cap":"The pipeline as a live WebGL scene, with a feed of signature-verified deliveries beside it."},{"src":"assets/witp-landing.png","alt":"WI-TP landing page","cap":"Landing page — every claim on it maps to a real endpoint."},{"src":"assets/witp-stats.png","alt":"WI-TP stats endpoint","cap":"GET /events/stats — visibility-scoped breakdown by event type, same colour legend as the pipeline."},{"src":"assets/witp-delivery.png","alt":"WI-TP single delivery view","cap":"A single delivery — what happened, signature status, and the raw payload underneath."},{"src":"assets/witp-repos.png","alt":"WI-TP repository registration","cap":"Repository registration — WI-TP installs the webhook itself, no manual GitHub settings step."}]' style="margin-top:12px">
+<div style="position:relative;border-radius:8px;overflow:hidden;border:2px solid #c39a63;box-shadow:0 3px 0 rgba(109,69,38,.22);background:#2b1c14">
+<img data-g-img src="assets/witp-pipeline.png" alt="WI-TP live pipeline console" style="display:block;width:100%;height:190px;object-fit:cover;object-position:top">
+<button type="button" data-g-prev aria-label="Previous image" style="position:absolute;left:7px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.94);cursor:pointer;font:700 16px Karla,sans-serif;color:#6d4526;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">‹</button>
+<button type="button" data-g-next aria-label="Next image" style="position:absolute;right:7px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.94);cursor:pointer;font:700 16px Karla,sans-serif;color:#6d4526;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">›</button>
+<div data-g-count style="position:absolute;right:8px;bottom:7px;font:700 10px Karla,sans-serif;color:#f7f3ec;background:rgba(61,35,15,.7);padding:3px 8px;border-radius:20px">1 / 5</div>
+<div style="position:absolute;left:8px;top:7px;font:700 9.5px Karla,sans-serif;letter-spacing:.06em;color:#f7f3ec;background:rgba(61,35,15,.7);padding:3px 8px;border-radius:20px;pointer-events:none">⤢ TAP TO ENLARGE</div>
+</div>
+<div data-g-cap style="margin-top:6px;font:400 12px/1.45 Karla,sans-serif;color:#8a5a34;min-height:32px">The pipeline as a live WebGL scene, with a feed of signature-verified deliveries beside it.</div>
+</div>
+<div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">NestJS backend in production: GitHub OAuth, JWT guards, HMAC-SHA256 verification, ETL normalization, idempotent Postgres writes via TypeORM.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">The Repositories module installs and manages GitHub webhooks programmatically through the GitHub API — no manual settings step.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Deployed to Cloud Run by GitHub Actions authenticated with Workload Identity Federation — keyless, no service account keys.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Next.js + React Three Fiber frontend streams every delivery, GitHub → Guard → Transform → Postgres, into this kind of interactive 3D scene.</div>
+<div style="font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">The console shows real, live public data — no account needed to look around.</div>
+</div>
+<div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px">
+<a href="https://wi-tp-web-423777428283.europe-west1.run.app" target="_blank" rel="noopener" style="display:flex;align-items:center;height:44px;padding:0 15px;background:#e0762a;border:2px solid #6d4526;border-radius:9px;box-shadow:0 4px 0 #6d4526;font:700 11px Karla,sans-serif;letter-spacing:.12em;color:#2b1408;text-decoration:none">LIVE CONSOLE ↗</a>
+<a href="https://wi-tp-423777428283.europe-west1.run.app" target="_blank" rel="noopener" style="display:flex;align-items:center;height:44px;padding:0 15px;background:#e2cfa6;border:2px solid #6d4526;border-radius:9px;box-shadow:0 4px 0 #6d4526;font:700 11px Karla,sans-serif;letter-spacing:.12em;color:#43230f;text-decoration:none">API ↗</a>
+<a href="https://github.com/DanielGit28" target="_blank" rel="noopener" style="display:flex;align-items:center;height:44px;padding:0 15px;background:#e2cfa6;border:2px solid #6d4526;border-radius:9px;box-shadow:0 4px 0 #6d4526;font:700 11px Karla,sans-serif;letter-spacing:.12em;color:#43230f;text-decoration:none">GITHUB ↗</a>
+</div>
+</div>
+</div>
+
+<div data-stage="6" style="position:absolute;left:0;bottom:0;width:100%;opacity:0;background:#efe0c0;border:2px solid #6d4526;border-radius:14px;padding:9px;box-shadow:0 8px 0 #6d4526,0 22px 42px rgba(0,0,0,.45);transform:rotate(-1.1deg)">
+<div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 07 · END OF LEVEL</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">GMT-6</div></div>
+<div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">Let's build something</div>
+<div style="margin-top:11px;font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Five years in, backend depth in NestJS, Node.js and TypeScript, and the rare habit of designing the thing before building it. English advanced, Spanish native.</div>
+<div style="margin-top:15px;display:flex;flex-direction:column;gap:8px">
+<a href="mailto:duniel12@gmail.com" style="display:flex;align-items:center;justify-content:center;height:48px;background:#e0762a;border:2px solid #6d4526;border-radius:10px;box-shadow:0 5px 0 #6d4526;font:700 12px Karla,sans-serif;letter-spacing:.14em;color:#2b1408;text-decoration:none">duniel12@gmail.com</a>
+<div style="display:flex;gap:8px">
+<a href="https://linkedin.com/in/daniel-zuniga-205113226" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;height:46px;background:#e2cfa6;border:2px solid #6d4526;border-radius:10px;box-shadow:0 4px 0 #6d4526;font:700 11px Karla,sans-serif;letter-spacing:.12em;color:#43230f;text-decoration:none">LINKEDIN ↗</a>
+<a href="https://github.com/DanielGit28" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;height:46px;background:#e2cfa6;border:2px solid #6d4526;border-radius:10px;box-shadow:0 4px 0 #6d4526;font:700 11px Karla,sans-serif;letter-spacing:.12em;color:#43230f;text-decoration:none">GITHUB ↗</a>
+</div>
+<a href="assets/CV-DanielZuniga.pdf" download="Daniel-Zuniga-Rojas-CV.pdf" style="display:flex;align-items:center;justify-content:center;height:46px;background:#efe0c0;border:2px dashed #b0783f;border-radius:10px;font:700 11px Karla,sans-serif;letter-spacing:.12em;color:#43230f;text-decoration:none">DOWNLOAD CV</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div ref="{{ railRef }}" style="position:absolute;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;pointer-events:auto"></div>
+
+<div ref="{{ hintRef }}" style="position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;animation:bobHint 2.4s ease-in-out infinite;transition:opacity .5s ease">
+<div style="font:700 10.5px Karla,sans-serif;letter-spacing:.2em;color:#f0dcb6;text-shadow:0 2px 8px rgba(0,0,0,.75)">SCROLL, DRAG OR PRESS → TO WALK</div>
+<div style="font:400 16px/1 Karla,sans-serif;color:#f0dcb6;text-shadow:0 2px 8px rgba(0,0,0,.75)">→</div>
+</div>
+
+</div>
+
+<div ref="{{ loadRef }}" style="position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:#2b1c14;transition:opacity .7s ease">
+<div style="font:400 15px 'Bree Serif',serif;color:#c39a63;letter-spacing:.14em">stitching the world together…</div>
+</div>
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  constructor(p){
+    super(p);
+    this.rootRef=React.createRef(); this.hostRef=React.createRef(); this.overlayRef=React.createRef();
+    this.cardsRef=React.createRef(); this.railRef=React.createRef(); this.hintRef=React.createRef();
+    this.loadRef=React.createRef(); this.spacerRef=React.createRef();
+    this.active=-1; this.progress=0; this.charX=0; this.camX=0; this.walkPhase=0;
+  }
+  renderVals(){
+    return {rootRef:this.rootRef,hostRef:this.hostRef,overlayRef:this.overlayRef,cardsRef:this.cardsRef,
+      railRef:this.railRef,hintRef:this.hintRef,loadRef:this.loadRef,spacerRef:this.spacerRef};
+  }
+  componentDidMount(){ this.boot(); }
+  componentWillUnmount(){ this.dead=true; if(this._ro)this._ro.disconnect(); if(this._unbind)this._unbind(); }
+
+  // ---------- input: wheel / drag / keys drive the walk ----------
+  nudge(d){ this.targetT=Math.max(0,Math.min(1,(this.targetT||0)+d)); this.touched=true; }
+  goTo(t){ this.targetT=Math.max(0,Math.min(1,t)); this.touched=true; }
+  bindInput(){
+    const el=this.rootRef.current;
+    this.targetT=0;
+    const inCard=e=>e.target&&e.target.closest&&e.target.closest('[data-stage]');
+    const onWheel=e=>{ if(inCard(e)) return; e.preventDefault(); this.nudge((e.deltaY+e.deltaX)*0.00055); };
+    let down=false,lx=0;
+    const onDown=e=>{ if(inCard(e)) return; down=true; lx=(e.touches?e.touches[0].clientX:e.clientX); el.style.cursor='grabbing'; };
+    const onMove=e=>{ if(!down)return; const x=(e.touches?e.touches[0].clientX:e.clientX); this.nudge((lx-x)*0.0016); lx=x; if(e.cancelable)e.preventDefault(); };
+    const onUp=()=>{ down=false; el.style.cursor='grab'; };
+    const onKey=e=>{
+      if(this._modalCtrl) return;
+      const k=e.key;
+      if(k==='ArrowRight'||k==='d'){ this.nudge(.012); e.preventDefault(); }
+      else if(k==='ArrowLeft'||k==='a'){ this.nudge(-.012); e.preventDefault(); }
+      else if(k==='Home'){ this.goTo(0); } else if(k==='End'){ this.goTo(1); }
+    };
+    el.addEventListener('wheel',onWheel,{passive:false});
+    el.addEventListener('mousedown',onDown); el.addEventListener('touchstart',onDown,{passive:true});
+    window.addEventListener('mousemove',onMove); el.addEventListener('touchmove',onMove,{passive:false});
+    window.addEventListener('mouseup',onUp); window.addEventListener('touchend',onUp);
+    window.addEventListener('keydown',onKey);
+    this._onResize=()=>this.resize();
+    window.addEventListener('resize',this._onResize);
+    this._unbind=()=>{
+      el.removeEventListener('wheel',onWheel);
+      window.removeEventListener('mousemove',onMove); window.removeEventListener('mouseup',onUp);
+      window.removeEventListener('touchend',onUp); window.removeEventListener('keydown',onKey);
+      window.removeEventListener('resize',this._onResize);
+      if(this._onModalKey) window.removeEventListener('keydown',this._onModalKey);
+      if(this._modalEl&&this._modalEl.parentNode) this._modalEl.parentNode.removeChild(this._modalEl);
+    };
+  }
+
+  // ---------- project image carousels + lightbox modal ----------
+  initGalleries(){
+    const root=this.cardsRef.current; if(!root) return;
+    this.setupGalleryModal();
+    root.querySelectorAll('[data-gallery]').forEach(g=>{
+      let items; try{ items=JSON.parse(g.getAttribute('data-gallery')); }catch(e){ return; }
+      if(!items||!items.length) return;
+      const img=g.querySelector('[data-g-img]'), cap=g.querySelector('[data-g-cap]'), count=g.querySelector('[data-g-count]');
+      const prevBtn=g.querySelector('[data-g-prev]'), nextBtn=g.querySelector('[data-g-next]');
+      const ctrl={items,idx:0};
+      ctrl.render=()=>{
+        const it=ctrl.items[ctrl.idx];
+        img.src=it.src; img.alt=it.alt;
+        cap.textContent=it.cap;
+        count.textContent=(ctrl.idx+1)+' / '+ctrl.items.length;
+        if(this._modalCtrl===ctrl) this.renderModal();
+      };
+      ctrl.prev=()=>{ ctrl.idx=(ctrl.idx-1+ctrl.items.length)%ctrl.items.length; ctrl.render(); };
+      ctrl.next=()=>{ ctrl.idx=(ctrl.idx+1)%ctrl.items.length; ctrl.render(); };
+      prevBtn.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); ctrl.prev(); });
+      nextBtn.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); ctrl.next(); });
+      img.style.cursor='zoom-in';
+      img.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); this.openModal(ctrl); });
+      ctrl.render();
+    });
+  }
+  setupGalleryModal(){
+    if(this._modalEl) return;
+    const overlay=document.createElement('div');
+    overlay.setAttribute('data-gallery-modal','');
+    overlay.style.cssText='position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:rgba(20,12,8,.88);padding:min(6vw,50px)';
+    overlay.innerHTML=
+      '<div style="position:relative;max-width:92vw;max-height:92vh;display:flex;flex-direction:column;align-items:center">'+
+        '<button type="button" data-m-close aria-label="Close" style="position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;border:2px solid #6d4526;background:#efe0c0;color:#6d4526;font:700 18px Karla,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0">×</button>'+
+        '<div style="position:relative;display:flex;align-items:center;justify-content:center;max-width:100%">'+
+          '<button type="button" data-m-prev aria-label="Previous image" style="position:absolute;left:10px;width:46px;height:46px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.95);color:#6d4526;font:700 20px Karla,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 3px 0 rgba(0,0,0,.3)">‹</button>'+
+          '<img data-m-img style="display:block;max-width:82vw;max-height:74vh;object-fit:contain;border-radius:10px;border:3px solid #c39a63;background:#161010">'+
+          '<button type="button" data-m-next aria-label="Next image" style="position:absolute;right:10px;width:46px;height:46px;border-radius:50%;border:2px solid #6d4526;background:rgba(239,224,192,.95);color:#6d4526;font:700 20px Karla,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 3px 0 rgba(0,0,0,.3)">›</button>'+
+        '</div>'+
+        '<div data-m-cap style="margin-top:16px;max-width:74vw;text-align:center;font:400 15.5px/1.55 Karla,sans-serif;color:#f0dcb6"></div>'+
+        '<div data-m-count style="margin-top:8px;font:700 11px Karla,sans-serif;letter-spacing:.16em;color:#c9a276"></div>'+
+      '</div>';
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click',e=>{ if(e.target===overlay) this.closeModal(); });
+    overlay.querySelector('[data-m-close]').addEventListener('click',e=>{ e.stopPropagation(); this.closeModal(); });
+    overlay.querySelector('[data-m-prev]').addEventListener('click',e=>{ e.stopPropagation(); if(this._modalCtrl) this._modalCtrl.prev(); });
+    overlay.querySelector('[data-m-next]').addEventListener('click',e=>{ e.stopPropagation(); if(this._modalCtrl) this._modalCtrl.next(); });
+    this._modalEl=overlay;
+    this._onModalKey=e=>{
+      if(!this._modalCtrl) return;
+      if(e.key==='Escape'){ this.closeModal(); }
+      else if(e.key==='ArrowRight'){ this._modalCtrl.next(); e.preventDefault(); }
+      else if(e.key==='ArrowLeft'){ this._modalCtrl.prev(); e.preventDefault(); }
+    };
+    window.addEventListener('keydown',this._onModalKey);
+  }
+  openModal(ctrl){ this._modalCtrl=ctrl; this._modalEl.style.display='flex'; this.renderModal(); }
+  renderModal(){
+    if(!this._modalCtrl||!this._modalEl) return;
+    const it=this._modalCtrl.items[this._modalCtrl.idx];
+    this._modalEl.querySelector('[data-m-img]').src=it.src;
+    this._modalEl.querySelector('[data-m-img]').alt=it.alt;
+    this._modalEl.querySelector('[data-m-cap]').textContent=it.cap;
+    this._modalEl.querySelector('[data-m-count]').textContent=(this._modalCtrl.idx+1)+' / '+this._modalCtrl.items.length;
+  }
+  closeModal(){ if(this._modalEl) this._modalEl.style.display='none'; this._modalCtrl=null; }
+
+  // ---------- textures ----------
+  canvasTex(THREE,w,h,draw,rep){
+    const c=document.createElement('canvas'); c.width=w; c.height=h;
+    draw(c.getContext('2d'),w,h);
+    const t=new THREE.CanvasTexture(c);
+    t.wrapS=t.wrapT=THREE.RepeatWrapping;
+    if(rep) t.repeat.set(rep[0],rep[1]);
+    t.anisotropy=4;
+    return t;
+  }
+  makeTextures(THREE){
+    this.T={};
+    this.T.card=this.canvasTex(THREE,256,256,(x,w,h)=>{
+      x.fillStyle='#c99a63'; x.fillRect(0,0,w,h);
+      for(let i=0;i<3000;i++){const a=Math.random()*.14;x.fillStyle=`rgba(${Math.random()<.5?90:255},${Math.random()<.5?60:230},40,${a})`;x.fillRect(Math.random()*w,Math.random()*h,2,1);}
+      x.strokeStyle='rgba(120,80,45,.18)';
+      for(let y=0;y<h;y+=7){x.beginPath();x.moveTo(0,y+Math.random()*2);x.lineTo(w,y+Math.random()*2);x.stroke();}
+    },[3,3]);
+    this.T.fuzz=this.canvasTex(THREE,256,256,(x,w,h)=>{
+      x.fillStyle='#808080'; x.fillRect(0,0,w,h);
+      for(let i=0;i<9000;i++){const g=110+Math.random()*90;x.fillStyle=`rgb(${g},${g},${g})`;x.fillRect(Math.random()*w,Math.random()*h,2,2);}
+    },[6,6]);
+    this.T.weave=this.canvasTex(THREE,128,128,(x,w,h)=>{
+      x.fillStyle='#8a8a8a'; x.fillRect(0,0,w,h);
+      x.strokeStyle='#c8c8c8'; x.lineWidth=3;
+      for(let i=0;i<w;i+=8){x.beginPath();x.moveTo(i,0);x.lineTo(i,h);x.stroke();}
+      x.strokeStyle='#5a5a5a';
+      for(let i=0;i<h;i+=8){x.beginPath();x.moveTo(0,i);x.lineTo(w,i);x.stroke();}
+    },[8,8]);
+  }
+  felt(THREE,color,rough){
+    return new THREE.MeshStandardMaterial({color,roughness:rough===undefined?.98:rough,metalness:0,bumpMap:this.T.fuzz,bumpScale:.035});
+  }
+  cardMat(THREE){ return new THREE.MeshStandardMaterial({map:this.T.card,roughness:.92,metalness:0,bumpMap:this.T.card,bumpScale:.02}); }
+  wood(THREE){ return new THREE.MeshStandardMaterial({color:0x9a6534,roughness:.75,bumpMap:this.T.fuzz,bumpScale:.02}); }
+  glow(THREE,color){ return new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.5,roughness:.5}); }
+
+  label(THREE,text,sub,accent){
+    const w=1024,h=256;
+    const t=this.canvasTex(THREE,w,h,(x)=>{
+      x.clearRect(0,0,w,h);
+      x.font="700 96px 'Bree Serif', Georgia, serif"; x.textAlign='center'; x.textBaseline='middle';
+      x.lineWidth=14; x.strokeStyle='rgba(60,32,14,.9)'; x.strokeText(text,w/2,sub?98:h/2);
+      x.fillStyle='#f6e7c6'; x.fillText(text,w/2,sub?98:h/2);
+      if(sub){ x.font="700 44px Karla, sans-serif"; x.fillStyle=accent||'#f0b070'; x.fillText(sub,w/2,186); }
+    });
+    t.repeat.set(1,1);
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(4.6,1.15),new THREE.MeshBasicMaterial({map:t,transparent:true}));
+    return m;
+  }
+  stitchRun(THREE,x0,x1,y,z,color,count){
+    const g=new THREE.BoxGeometry(.16,.05,.05);
+    const m=new THREE.MeshStandardMaterial({color:color||0xf0dcae,roughness:.9});
+    const inst=new THREE.InstancedMesh(g,m,count);
+    const d=new THREE.Object3D();
+    for(let i=0;i<count;i++){
+      d.position.set(x0+(x1-x0)*(i/(count-1)),y,z);
+      d.rotation.z=(i%2?1:-1)*.32; d.updateMatrix(); inst.setMatrixAt(i,d.matrix);
+    }
+    return inst;
+  }
+  stitchRing(THREE,center,radius,count,color,axis){
+    const g=axis==='x'?new THREE.BoxGeometry(.045,.045,.11):new THREE.BoxGeometry(.11,.045,.045);
+    const m=new THREE.MeshStandardMaterial({color:color||0x6b4530,roughness:.85});
+    const inst=new THREE.InstancedMesh(g,m,count);
+    const d=new THREE.Object3D();
+    for(let i=0;i<count;i++){
+      const a=(i/count)*Math.PI*2;
+      if(axis==='x'){ d.position.set(center.x,center.y+Math.sin(a)*radius,center.z+Math.cos(a)*radius); d.rotation.set(a+Math.PI/2,0,0); }
+      else{ d.position.set(center.x+Math.sin(a)*radius,center.y,center.z+Math.cos(a)*radius); d.rotation.set(0,a,0); }
+      d.updateMatrix(); inst.setMatrixAt(i,d.matrix);
+    }
+    return inst;
+  }
+  patchTex(THREE,color){
+    return this.canvasTex(THREE,128,128,(x,w,h)=>{
+      x.clearRect(0,0,w,h);
+      const r=20,pad=8;
+      x.beginPath();
+      x.moveTo(pad+r,pad); x.arcTo(w-pad,pad,w-pad,h-pad,r); x.arcTo(w-pad,h-pad,pad,h-pad,r);
+      x.arcTo(pad,h-pad,pad,pad,r); x.arcTo(pad,pad,w-pad,pad,r); x.closePath();
+      x.fillStyle=color; x.fill();
+      for(let i=0;i<400;i++){const a=Math.random()*.08;x.fillStyle=`rgba(0,0,0,${a})`;x.fillRect(Math.random()*w,Math.random()*h,2,1);}
+      x.setLineDash([5,4]); x.lineWidth=4; x.strokeStyle='rgba(35,18,8,.85)'; x.stroke();
+    });
+  }
+
+  // ---------- stages ----------
+  buildStage(THREE,i,S){
+    const g=new THREE.Group(); g.position.x=S.x;
+    const plat=new THREE.Mesh(new THREE.BoxGeometry(11,1.2,7),this.cardMat(THREE));
+    plat.position.set(0,-.62,0); plat.receiveShadow=true; plat.castShadow=true; g.add(plat);
+    const top=new THREE.Mesh(new THREE.BoxGeometry(10.6,.16,6.7),this.felt(THREE,S.felt));
+    top.position.set(0,.05,0); top.receiveShadow=true; g.add(top);
+    g.add(this.stitchRun(THREE,-5,5,.06,3.4,0xf2e0b4,26));
+
+    const postM=this.wood(THREE);
+    for(const sx of [-2.3,2.3]){
+      const p=new THREE.Mesh(new THREE.CylinderGeometry(.14,.17,5.0,10),postM);
+      p.position.set(sx,2.5,-1.1); p.castShadow=true; g.add(p);
+      const knob=new THREE.Mesh(new THREE.SphereGeometry(.2,12,10),this.felt(THREE,S.accent,.7));
+      knob.position.set(sx,5.05,-1.1); g.add(knob);
+    }
+    const board=new THREE.Mesh(new THREE.BoxGeometry(5.4,1.5,.22),this.felt(THREE,S.board,.95));
+    board.position.set(0,4.2,-1.05); board.castShadow=true; g.add(board);
+    const lab=this.label(THREE,S.name,S.sub,S.accentCss); lab.position.set(0,4.2,-.9); g.add(lab);
+
+    const lampL=new THREE.PointLight(S.accent,0,9,2); lampL.position.set(0,2.4,2.2); g.add(lampL);
+    S.lamp=lampL;
+
+    const bulbs=new THREE.Group();
+    for(let b=0;b<5;b++){
+      const bl=new THREE.Mesh(new THREE.SphereGeometry(.11,10,8),this.glow(THREE,S.accent));
+      bl.position.set(-2+b,5.15,-1.1); bulbs.add(bl);
+    }
+    g.add(bulbs); S.bulbs=bulbs;
+
+    const props=new THREE.Group(); props.position.y=.13; g.add(props);
+    S.props=props; S.tick=this['prop_'+S.kind](THREE,props,S)||(()=>{});
+    return g;
+  }
+
+  prop_campus(THREE,p,S){
+    const books=[];
+    for(let i=0;i<5;i++){
+      const b=new THREE.Mesh(new THREE.BoxGeometry(2.2-i*.14,.32,1.5),this.felt(THREE,[0x8f5f3a,0xa8763f,0x6f7f4a,0x9a5342,0x7a6a4a][i]));
+      b.position.set(1.4,.18+i*.34,-.2); b.rotation.y=(Math.random()-.5)*.2; b.castShadow=true; p.add(b); books.push(b);
+    }
+    const cap=new THREE.Group();
+    const dome=new THREE.Mesh(new THREE.SphereGeometry(.42,14,10,0,Math.PI*2,0,Math.PI/2),this.felt(THREE,0x2f2a3d));
+    const flat=new THREE.Mesh(new THREE.BoxGeometry(1.5,.1,1.5),this.felt(THREE,0x2f2a3d));
+    flat.position.y=.42; cap.add(dome,flat);
+    const tas=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,.5,6),this.felt(THREE,S.accent,.8));
+    tas.position.set(.6,.25,.55); cap.add(tas);
+    cap.position.set(1.4,2.05,-.2); cap.rotation.z=.1; p.add(cap);
+    const gear=new THREE.Mesh(new THREE.TorusGeometry(.55,.16,8,9),this.wood(THREE));
+    gear.position.set(-2.6,1.1,-.4); p.add(gear);
+    const gear2=new THREE.Mesh(new THREE.TorusGeometry(.36,.13,8,7),this.felt(THREE,S.accent,.8));
+    gear2.position.set(-1.7,.62,-.4); p.add(gear2);
+    return (t,near)=>{ cap.position.y=2.05+Math.sin(t*1.6)*.06; gear.rotation.z=t*.6; gear2.rotation.z=-t*.95; };
+  }
+  prop_trip(THREE,p,S){
+    const mtn=new THREE.Group();
+    for(let i=0;i<3;i++){
+      const m=new THREE.Mesh(new THREE.ConeGeometry(1.1-i*.18,1.6-i*.24,4),this.felt(THREE,[0x5d7a52,0x6f8a5c,0x4f6a48][i]));
+      m.position.set(1.2+i*1.0,.8-i*.12,-1.2-i*.5); m.rotation.y=.7; m.castShadow=true; mtn.add(m);
+    }
+    p.add(mtn);
+    const pole=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,2.6,8),this.wood(THREE));
+    pole.position.set(-1.8,1.3,.2); p.add(pole);
+    const plane=new THREE.Group();
+    const body=new THREE.Mesh(new THREE.CapsuleGeometry(.16,.62,6,10),this.felt(THREE,0xe4d8bd,.8));
+    body.rotation.z=Math.PI/2; plane.add(body);
+    const wing=new THREE.Mesh(new THREE.BoxGeometry(.28,.05,1.2),this.felt(THREE,S.accent,.8)); plane.add(wing);
+    const tail=new THREE.Mesh(new THREE.BoxGeometry(.05,.32,.34),this.felt(THREE,S.accent,.8)); tail.position.x=-.44; plane.add(tail);
+    p.add(plane);
+    const pin=new THREE.Mesh(new THREE.SphereGeometry(.14,10,8),this.glow(THREE,0xe0762a));
+    pin.position.set(2.2,1.7,-1.2); p.add(pin);
+    return (t)=>{
+      const a=t*.9;
+      plane.position.set(-1.8+Math.cos(a)*1.5,2.1+Math.sin(a*2)*.16,.2+Math.sin(a)*1.1);
+      plane.rotation.y=-a; plane.rotation.x=Math.sin(a*2)*.12;
+      pin.position.y=1.7+Math.abs(Math.sin(t*2.4))*.3;
+    };
+  }
+  prop_migrate(THREE,p,S){
+    const belt=new THREE.Mesh(new THREE.BoxGeometry(7.4,.26,1.5),this.felt(THREE,0x3f3a33,.9));
+    belt.position.set(0,1.1,-.3); belt.castShadow=true; p.add(belt);
+    for(const sx of [-3.4,3.4]){
+      const r=new THREE.Mesh(new THREE.CylinderGeometry(.5,.5,1.6,14),this.wood(THREE));
+      r.rotation.x=Math.PI/2; r.position.set(sx,1.1,-.3); p.add(r);
+      const leg=new THREE.Mesh(new THREE.BoxGeometry(.28,1.1,.28),this.wood(THREE));
+      leg.position.set(sx,.55,-.3); p.add(leg);
+    }
+    const boxes=[];
+    for(let i=0;i<7;i++){
+      const b=new THREE.Mesh(new THREE.BoxGeometry(.7,.7,.7),this.cardMat(THREE));
+      b.position.set(-3.4+i*1.1,1.62,-.3); b.castShadow=true; p.add(b); boxes.push(b);
+      const tape=new THREE.Mesh(new THREE.BoxGeometry(.72,.14,.18),this.felt(THREE,S.accent,.8));
+      tape.position.y=.36; b.add(tape);
+    }
+    return (t)=>{
+      boxes.forEach((b,i)=>{
+        const u=((t*.42+i/7)%1);
+        b.position.x=-3.6+u*7.2;
+        b.position.y=1.62+Math.max(0,Math.sin(u*Math.PI*7))*.05;
+        b.rotation.y=u*3.6;
+      });
+    };
+  }
+  prop_ibm(THREE,p,S){
+    const frame=new THREE.Mesh(new THREE.BoxGeometry(5.2,3.2,.3),this.cardMat(THREE));
+    frame.position.set(.4,1.7,-.5); frame.castShadow=true; p.add(frame);
+    const tiles=[];
+    for(let r=0;r<3;r++) for(let c=0;c<4;c++){
+      const tl=new THREE.Mesh(new THREE.BoxGeometry(1.05,.78,.12),this.felt(THREE,0x2d3742,.85));
+      tl.position.set(.4-1.72+c*1.15,1.7+.95-r*.95,-.32); p.add(tl); tiles.push(tl);
+    }
+    const shield=new THREE.Mesh(new THREE.OctahedronGeometry(.5),this.glow(THREE,S.accent));
+    shield.position.set(-2.9,1.5,.4); p.add(shield);
+    const stand=new THREE.Mesh(new THREE.CylinderGeometry(.09,.14,1.5,8),this.wood(THREE));
+    stand.position.set(-2.9,.75,.4); p.add(stand);
+    return (t,near)=>{
+      tiles.forEach((tl,i)=>{
+        const on=(Math.sin(t*1.5+i*1.1)+1)/2;
+        tl.material.color.setHSL(.07,.55,.16+on*.32*(near?1:.4));
+      });
+      shield.rotation.y=t*.7; shield.rotation.x=Math.sin(t*.9)*.3;
+      shield.position.y=1.5+Math.sin(t*1.7)*.1;
+    };
+  }
+  prop_msc(THREE,p,S){
+    const bars=[];
+    const heights=[1.0,1.9,1.4,2.5,2.0,3.0];
+    for(let i=0;i<6;i++){
+      const b=new THREE.Mesh(new THREE.BoxGeometry(.6,1,.6),this.felt(THREE,i%2?S.accent:0xd8c39a,.9));
+      b.position.set(-1.9+i*.78,.5,-.4); b.castShadow=true; p.add(b); bars.push([b,heights[i]]);
+    }
+    const nodes=[];
+    for(let i=0;i<6;i++){
+      const n=new THREE.Mesh(new THREE.SphereGeometry(.17,10,8),this.glow(THREE,S.accent));
+      n.position.set(2.6+Math.cos(i*1.05)*.9,2.0+Math.sin(i*1.05)*.9,-.3); p.add(n); nodes.push(n);
+    }
+    const threads=new THREE.Group();
+    for(let i=0;i<6;i++){
+      const a=nodes[i].position,b=nodes[(i+2)%6].position;
+      const geo=new THREE.BufferGeometry().setFromPoints([a,b]);
+      threads.add(new THREE.Line(geo,new THREE.LineBasicMaterial({color:0xe0c79a,transparent:true,opacity:.6})));
+    }
+    p.add(threads);
+    return (t)=>{
+      bars.forEach(([b,h],i)=>{
+        const s=h*(.55+.45*(Math.sin(t*1.1+i*.7)*.5+.5));
+        b.scale.y=s; b.position.y=s*.5;
+      });
+      nodes.forEach((n,i)=>{ n.material.emissiveIntensity=.7+Math.abs(Math.sin(t*2+i))*1.6; });
+    };
+  }
+  prop_pipe(THREE,p,S){
+    const pts=[[-3.4,1.2],[-1.6,2.1],[.4,1.3],[2.3,2.2],[3.9,1.4]];
+    const tubes=[];
+    for(let i=0;i<pts.length-1;i++){
+      const a=new THREE.Vector3(pts[i][0],pts[i][1],-.3), b=new THREE.Vector3(pts[i+1][0],pts[i+1][1],-.3);
+      const len=a.distanceTo(b);
+      const tb=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,len,10),this.cardMat(THREE));
+      tb.position.copy(a).lerp(b,.5);
+      tb.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),b.clone().sub(a).normalize());
+      tb.castShadow=true; p.add(tb); tubes.push([a,b]);
+    }
+    pts.forEach(([x,y])=>{
+      const j=new THREE.Mesh(new THREE.SphereGeometry(.3,12,10),this.felt(THREE,0x7a5237,.85));
+      j.position.set(x,y,-.3); p.add(j);
+    });
+    const beads=[];
+    for(let i=0;i<6;i++){
+      const bd=new THREE.Mesh(new THREE.SphereGeometry(.15,10,8),this.glow(THREE,S.accent));
+      p.add(bd); beads.push(bd);
+    }
+    const db=new THREE.Mesh(new THREE.CylinderGeometry(.7,.7,1.1,16),this.felt(THREE,0x4a5b46,.9));
+    db.position.set(3.9,.62,-.3); db.castShadow=true; p.add(db);
+    return (t)=>{
+      beads.forEach((bd,i)=>{
+        const u=((t*.22+i/6)%1)*tubes.length;
+        const seg=Math.min(tubes.length-1,Math.floor(u)); const f=u-seg;
+        bd.position.copy(tubes[seg][0]).lerp(tubes[seg][1],f);
+        bd.material.emissiveIntensity=1.2+Math.sin(t*6+i)*.5;
+      });
+      db.rotation.y=t*.4;
+    };
+  }
+  prop_mail(THREE,p,S){
+    const post=new THREE.Mesh(new THREE.BoxGeometry(.3,2.0,.3),this.wood(THREE));
+    post.position.set(0,1.0,-.3); post.castShadow=true; p.add(post);
+    const box=new THREE.Mesh(new THREE.CapsuleGeometry(.55,1.1,6,12),this.felt(THREE,S.accent,.85));
+    box.rotation.z=Math.PI/2; box.position.set(0,2.3,-.3); box.castShadow=true; p.add(box);
+    const flag=new THREE.Mesh(new THREE.BoxGeometry(.42,.3,.05),this.felt(THREE,0xd8c39a,.85));
+    flag.position.set(.62,2.65,-.3); p.add(flag);
+    const envs=[];
+    for(let i=0;i<4;i++){
+      const e=new THREE.Mesh(new THREE.BoxGeometry(.6,.42,.05),this.felt(THREE,0xf0e2c0,.9));
+      p.add(e); envs.push(e);
+    }
+    const star=new THREE.Mesh(new THREE.OctahedronGeometry(.42,0),this.glow(THREE,0xf0b070));
+    star.position.set(-2.6,2.6,-.2); p.add(star);
+    return (t)=>{
+      envs.forEach((e,i)=>{
+        const a=t*.8+i*(Math.PI/2);
+        e.position.set(Math.cos(a)*1.7,2.3+Math.sin(a*1.5)*.5,-.3+Math.sin(a)*.9);
+        e.rotation.set(Math.sin(a)*.4,-a,Math.cos(a)*.3);
+      });
+      flag.rotation.z=Math.sin(t*1.4)*.25;
+      star.rotation.y=t*1.1; star.position.y=2.6+Math.sin(t*1.8)*.14;
+    };
+  }
+
+  // ---------- character ----------
+  buildChar(THREE){
+    const g=new THREE.Group();
+    const burlap=new THREE.MeshStandardMaterial({color:0xbf8f61,roughness:1,bumpMap:this.T.weave,bumpScale:.055});
+    const threadMat=new THREE.MeshStandardMaterial({color:0xf0dcae,roughness:.6});
+    const buttonMat=new THREE.MeshStandardMaterial({color:0x2a1e14,roughness:.5,metalness:.05});
+
+    const body=new THREE.Mesh(new THREE.CapsuleGeometry(.37,.44,8,16),burlap);
+    body.position.y=1.02; body.castShadow=true; g.add(body);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(.39,20,16),burlap);
+    head.position.y=1.67; head.scale.set(1,.94,.95); head.castShadow=true; g.add(head);
+
+    // stitched seams: ear-to-ear over the head, and a belt seam at the waist
+    g.add(this.stitchRing(THREE,{x:0,y:1.67,z:0},.375,24,0x6b4530,'x'));
+    g.add(this.stitchRing(THREE,{x:0,y:.8,z:0},.37,22,0x6b4530,'y'));
+
+    // sewn button eyes with an X-thread cross
+    for(const sx of [-.16,.16]){
+      const btn=new THREE.Mesh(new THREE.SphereGeometry(.09,14,10),buttonMat);
+      btn.scale.set(1,1.2,.5); btn.position.set(sx,1.72,.335); g.add(btn);
+      const t1=new THREE.Mesh(new THREE.BoxGeometry(.15,.02,.02),threadMat);
+      t1.rotation.z=Math.PI/4; t1.position.set(sx,1.72,.365); g.add(t1);
+      const t2=t1.clone(); t2.rotation.z=-Math.PI/4; g.add(t2);
+    }
+
+    const zip=new THREE.Group();
+    for(let i=0;i<7;i++){
+      const z=new THREE.Mesh(new THREE.BoxGeometry(.085,.05,.04),new THREE.MeshStandardMaterial({color:0xd8b46a,roughness:.4,metalness:.5}));
+      z.position.set(0,.8+i*.085,.35-Math.abs(i-3)*.01); zip.add(z);
+    }
+    const pull=new THREE.Mesh(new THREE.TorusGeometry(.045,.013,6,10),new THREE.MeshStandardMaterial({color:0xd8b46a,roughness:.35,metalness:.6}));
+    pull.position.set(0,1.38,.33); zip.add(pull);
+    g.add(zip);
+
+    // patchwork felt patches, sewn on
+    const chestPatch=new THREE.Mesh(new THREE.PlaneGeometry(.24,.22),new THREE.MeshStandardMaterial({map:this.patchTex(THREE,'#3f6a86'),transparent:true,roughness:.9}));
+    chestPatch.position.set(-.19,1.1,.315); chestPatch.rotation.y=.4; g.add(chestPatch);
+
+    const arms=[],legs=[];
+    for(const sx of [-1,1]){
+      const arm=new THREE.Group(); arm.position.set(sx*.40,1.22,0);
+      const am=new THREE.Mesh(new THREE.CapsuleGeometry(.10,.4,6,10),burlap);
+      am.position.y=-.28; am.castShadow=true; arm.add(am);
+      const hand=new THREE.Mesh(new THREE.SphereGeometry(.13,12,10),burlap);
+      hand.position.y=-.56; arm.add(hand);
+      g.add(arm); arms.push(arm);
+      const leg=new THREE.Group(); leg.position.set(sx*.17,.66,0);
+      const lm=new THREE.Mesh(new THREE.CapsuleGeometry(.12,.3,6,10),burlap);
+      lm.position.y=-.24; lm.castShadow=true; leg.add(lm);
+      const foot=new THREE.Mesh(new THREE.BoxGeometry(.28,.16,.4),new THREE.MeshStandardMaterial({color:0x8a5233,roughness:.9,bumpMap:this.T.fuzz,bumpScale:.03}));
+      foot.position.set(0,-.48,.08); foot.castShadow=true; leg.add(foot);
+      if(sx===1){
+        const legPatch=new THREE.Mesh(new THREE.PlaneGeometry(.15,.14),new THREE.MeshStandardMaterial({map:this.patchTex(THREE,'#4f8a86'),transparent:true,roughness:.9}));
+        legPatch.position.set(.02,-.08,.115); legPatch.rotation.y=-.2; leg.add(legPatch);
+      }
+      g.add(leg); legs.push(leg);
+    }
+    this.charParts={body,head,arms,legs,zip};
+    return g;
+  }
+
+  // ---------- boot ----------
+  async boot(){
+    let THREE;
+    try{ THREE=await import('https://esm.sh/three@0.160.0'); }
+    catch(e){ try{ THREE=await import('https://unpkg.com/three@0.160.0/build/three.module.js'); }catch(e2){ console.error('three failed',e2); return; } }
+    if(this.dead) return;
+    this.THREE=THREE;
+    this.makeTextures(THREE);
+
+    const host=this.hostRef.current;
+    const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.12;
+    host.appendChild(renderer.domElement);
+    Object.assign(renderer.domElement.style,{width:'100%',height:'100%',display:'block'});
+    this.renderer=renderer;
+
+    const scene=new THREE.Scene();
+    scene.fog=new THREE.Fog(0x7a5a54,38,104);
+    const camera=new THREE.PerspectiveCamera(42,1,.1,220);
+    this.scene=scene; this.camera=camera;
+
+    // sky
+    const skyTex=this.canvasTex(THREE,16,512,(x,w,h)=>{
+      const g=x.createLinearGradient(0,0,0,h);
+      g.addColorStop(0,'#3a2b48'); g.addColorStop(.3,'#6b3f59'); g.addColorStop(.55,'#b5604a'); g.addColorStop(.78,'#e79a52'); g.addColorStop(1,'#f6d79b');
+      x.fillStyle=g; x.fillRect(0,0,w,h);
+    });
+    skyTex.repeat.set(1,1);
+    const sky=new THREE.Mesh(new THREE.PlaneGeometry(400,120),new THREE.MeshBasicMaterial({map:skyTex,depthWrite:false}));
+    sky.position.set(0,30,-70); scene.add(sky); this.sky=sky;
+
+    scene.add(new THREE.HemisphereLight(0xffd9a8,0x3a2415,1.0));
+    const key=new THREE.DirectionalLight(0xffe0b0,2.1);
+    key.position.set(6,14,10); key.castShadow=true;
+    key.shadow.mapSize.set(1024,1024);
+    const sc=key.shadow.camera; sc.left=-14; sc.right=14; sc.top=14; sc.bottom=-10; sc.near=1; sc.far=60;
+    scene.add(key); scene.add(key.target); this.key=key;
+    const rim=new THREE.DirectionalLight(0xff9a4a,.7); rim.position.set(-8,5,-8); scene.add(rim);
+
+    const STAGES=[
+      {kind:'campus', name:'CENFOTEC', sub:'BSc · 2020–2024', felt:0x6f8a5c, board:0x4f6a48, accent:0x8fd36a, accentCss:'#b8f08a'},
+      {kind:'trip', name:'TRIPNARY', sub:'AI TRAVEL · 2024', felt:0x5f8a8a, board:0x3f6a6a, accent:0x5ad1c8, accentCss:'#8ff0e6'},
+      {kind:'migrate', name:'WEST MONROE', sub:'ENGINEER II · 2024', felt:0x8a6a9a, board:0x5f4a6f, accent:0xc48ae0, accentCss:'#e0b0f5'},
+      {kind:'ibm', name:'IBM', sub:'NOW · FRAUD & ABUSE', felt:0x9a6a3a, board:0x6f4a24, accent:0xe0762a, accentCss:'#ffb070'},
+      {kind:'msc', name:'EUDE', sub:"MSc BI · HONORS", felt:0x8a8a5a, board:0x5f5f3a, accent:0xe0c44a, accentCss:'#f5e08a'},
+      {kind:'pipe', name:'WI-TP', sub:'LIVE PIPELINE · 2026', felt:0x5a7a9a, board:0x3a5470, accent:0x5aa8e0, accentCss:'#8fd0f5'},
+      {kind:'mail', name:'HIRE ME', sub:'END OF LEVEL', felt:0xa85a3a, board:0x7a3a24, accent:0xf06a3a, accentCss:'#ffa070'}
+    ];
+    const SPAN=17;
+    STAGES.forEach((s,i)=>{ s.x=i*SPAN; });
+    this.STAGES=STAGES;
+    this.worldEnd=(STAGES.length-1)*SPAN;
+
+    // ground ribbon
+    const gLen=this.worldEnd+40;
+    const ground=new THREE.Mesh(new THREE.BoxGeometry(gLen,2.2,5.4),this.cardMat(THREE));
+    ground.position.set(this.worldEnd/2-8,-1.2,0); ground.receiveShadow=true; scene.add(ground);
+    const gtop=new THREE.Mesh(new THREE.BoxGeometry(gLen,.18,5.2),this.felt(THREE,0x6b4a33));
+    gtop.position.set(this.worldEnd/2-8,-.02,0); gtop.receiveShadow=true; scene.add(gtop);
+    scene.add(this.stitchRun(THREE,-20,this.worldEnd+20,-.35,2.72,0xe8d0a0,Math.round(gLen/1.1)));
+
+    // background hills
+    const hill=(z,color,amp,step,y)=>{
+      const shape=new THREE.Shape(); shape.moveTo(-30,-20);
+      for(let x=-30;x<=gLen;x+=step) shape.lineTo(x,y+Math.sin(x*.09+z)*amp+Math.cos(x*.041)*amp*.7);
+      shape.lineTo(gLen,-20); shape.closePath();
+      const m=new THREE.Mesh(new THREE.ShapeGeometry(shape),new THREE.MeshStandardMaterial({color,roughness:1,bumpMap:this.T.fuzz,bumpScale:.04}));
+      m.position.set(0,0,z); scene.add(m);
+    };
+    hill(-16,0x4a3628,2.2,4,2);
+    hill(-27,0x74544a,3.4,6,4);
+    hill(-40,0x9a7480,4.6,8,6);
+
+    // clouds
+    const clouds=new THREE.Group();
+    for(let i=0;i<14;i++){
+      const c=new THREE.Group();
+      for(let k=0;k<4;k++){
+        const s=new THREE.Mesh(new THREE.SphereGeometry(1.1+Math.random()*.8,10,8),new THREE.MeshStandardMaterial({color:0xe8d3b0,roughness:1,bumpMap:this.T.fuzz,bumpScale:.06}));
+        s.position.set(k*1.3-1.8,Math.random()*.5,Math.random()*.6); c.add(s);
+      }
+      c.position.set(-20+Math.random()*(gLen+20),11+Math.random()*7,-22-Math.random()*22);
+      c.scale.setScalar(.8+Math.random()*.9);
+      clouds.add(c);
+    }
+    scene.add(clouds); this.clouds=clouds;
+
+    // bunting between stages
+    for(let i=0;i<STAGES.length-1;i++){
+      const x0=STAGES[i].x+3,x1=STAGES[i+1].x-3,n=14;
+      for(let k=0;k<n;k++){
+        const u=k/(n-1), x=x0+(x1-x0)*u, sag=Math.sin(u*Math.PI)*1.3;
+        const tri=new THREE.Mesh(new THREE.ConeGeometry(.22,.46,3),this.felt(THREE,k%2?STAGES[i].accent:STAGES[i+1].accent,.85));
+        tri.position.set(x,7.3-sag,-3.2); tri.rotation.x=Math.PI; scene.add(tri);
+      }
+    }
+
+    STAGES.forEach((s,i)=>scene.add(this.buildStage(THREE,i,s)));
+
+    this.char=this.buildChar(THREE); this.char.position.z=1.8; scene.add(this.char);
+
+    // rail
+    const rail=this.railRef.current;
+    STAGES.forEach((s,i)=>{
+      const b=document.createElement('button');
+      b.type='button'; b.title=s.name;
+      b.style.cssText='width:15px;height:15px;border-radius:50%;border:2px solid #6d4526;background:#c9a276;box-shadow:0 3px 0 #6d4526;cursor:pointer;padding:0;transition:background .25s,transform .25s';
+      b.onclick=()=>this.goTo(i/(STAGES.length-1));
+      rail.appendChild(b);
+    });
+    this.railDots=Array.from(rail.children);
+
+    this.bindInput();
+    this.initGalleries();
+    this._ro=new ResizeObserver(()=>this.resize()); this._ro.observe(host);
+    this.resize();
+
+    const ld=this.loadRef.current;
+    if(ld){ ld.style.opacity='0'; setTimeout(()=>{ if(ld) ld.style.display='none'; },760); }
+
+    this.clock=new THREE.Clock();
+    this.loop();
+  }
+
+  resize(){
+    if(!this.renderer) return;
+    const host=this.hostRef.current; if(!host) return;
+    const w=host.clientWidth||innerWidth, h=host.clientHeight||innerHeight;
+    this.renderer.setSize(w,h,false);
+    this.camera.aspect=w/h; 
+    this.narrow=w<820;
+    this.camera.fov=this.narrow?54:42;
+    this.camera.updateProjectionMatrix();
+    const cards=this.cardsRef.current;
+    if(cards){
+      if(this.narrow){ Object.assign(cards.style,{left:'12px',right:'12px',width:'auto',bottom:'16px',maxWidth:'none'}); }
+      else { Object.assign(cards.style,{left:'26px',right:'auto',width:'395px',bottom:'26px',maxWidth:'calc(100% - 52px)'}); }
+    }
+  }
+
+  setActive(i){
+    if(i===this.active) return;
+    const cards=this.cardsRef.current.querySelectorAll('[data-stage]');
+    cards.forEach((c,k)=>{
+      const on=k===i;
+      c.style.opacity=on?'1':'0';
+      c.style.pointerEvents=on?'auto':'none';
+      c.style.transition='opacity .45s ease, transform .55s cubic-bezier(.2,.9,.25,1)';
+      c.style.transform=on?'translateY(0) rotate(-1.1deg)':'translateY(26px) rotate(-1.1deg)';
+      c.style.zIndex=on?'2':'1';
+    });
+    this.railDots.forEach((d,k)=>{
+      d.style.background=k===i?'#e0762a':'#c9a276';
+      d.style.transform=k===i?'scale(1.35)':'scale(1)';
+    });
+    this.active=i;
+  }
+
+  loop(){
+    if(this.dead) return;
+    requestAnimationFrame(()=>this.loop());
+    const THREE=this.THREE, dt=Math.min(.05,this.clock.getDelta()), t=this.clock.elapsedTime;
+    const target=this.targetT||0;
+    this.progress+=(target-this.progress)*Math.min(1,dt*4.5);
+    const tx=this.progress*this.worldEnd;
+    const prev=this.charX;
+    this.charX+=(tx-this.charX)*Math.min(1,dt*5);
+    const vel=(this.charX-prev)/Math.max(dt,.001);
+
+    const c=this.char, P=this.charParts;
+    c.position.x=this.charX;
+    const speed=Math.min(1,Math.abs(vel)/6);
+    this.walkPhase+=dt*(3.2+speed*9);
+    const sw=Math.sin(this.walkPhase)*(.28+speed*.62);
+    P.legs[0].rotation.z=sw; P.legs[1].rotation.z=-sw;
+    P.arms[0].rotation.z=-sw*.8; P.arms[1].rotation.z=sw*.8;
+    c.position.y=Math.abs(Math.sin(this.walkPhase))*(.04+speed*.1);
+    c.rotation.z=-Math.sign(vel)*speed*.09;
+    P.head.rotation.y=Math.sin(t*.7)*.12+Math.sign(vel)*speed*.2;
+    P.head.position.y=1.66+Math.sin(this.walkPhase*2)*.015;
+    c.rotation.y=vel<-.4?-.35:(speed>.02?.35:.1);
+
+    const camTargetX=this.charX+2.2;
+    this.camX+=(camTargetX-this.camX)*Math.min(1,dt*3.4);
+    this.camera.position.set(this.camX, 3.3+Math.sin(t*.4)*.12, this.narrow?21:17);
+    this.camera.lookAt(this.camX-(this.narrow?.6:3.6),3.1,0);
+
+    this.key.position.set(this.charX+6,14,10);
+    this.key.target.position.set(this.charX,0,0);
+    this.sky.position.x=this.camX*.6;
+    this.clouds.children.forEach((cl,i)=>{ cl.position.x+=dt*(.15+ (i%3)*.06); if(cl.position.x>this.worldEnd+30) cl.position.x=-30; });
+
+    let nearest=0,best=1e9;
+    this.STAGES.forEach((s,i)=>{
+      const d=Math.abs(s.x-this.charX);
+      if(d<best){best=d;nearest=i;}
+      const near=Math.max(0,1-d/9);
+      s.lamp.intensity=near*9;
+      s.bulbs.children.forEach((b,k)=>{
+        b.material.emissiveIntensity=near*(1.2+Math.sin(t*3+k*.8)*.7);
+      });
+      s.tick(t,near>.35);
+    });
+    if(best<7.5) this.setActive(nearest); else this.setActive(-1);
+
+    const hint=this.hintRef.current;
+    if(hint) hint.style.opacity=this.touched?'0':'1';
+
+    this.renderer.render(this.scene,this.camera);
+  }
+}
+</script>
+</body>
+</html>
