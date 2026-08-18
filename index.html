@@ -22,6 +22,12 @@ a:hover{color:#c05a17}
 [data-stage]{max-height:min(600px,calc(100vh - 110px));overflow-y:auto;scrollbar-width:thin;scrollbar-color:#c39a63 transparent}
 [data-stage]::-webkit-scrollbar{width:7px}
 [data-stage]::-webkit-scrollbar-thumb{background:#c39a63;border-radius:6px}
+@media (max-width:819px){
+  [data-stage]{position:fixed!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%) rotate(0deg)!important;width:min(92vw,420px)!important;max-height:78vh!important;z-index:0;opacity:0!important;pointer-events:none!important}
+  [data-stage]:not(.mobile-open) *{pointer-events:none!important}
+  [data-stage].mobile-open{z-index:90!important;opacity:1!important;pointer-events:auto!important}
+  .dc-card-close{display:flex!important;pointer-events:auto!important}
+}
 </style>
 </helmet>
 <div ref="{{ rootRef }}" style="position:relative;width:100%;height:100vh;overflow:hidden;touch-action:none;cursor:grab">
@@ -204,7 +210,7 @@ a:hover{color:#c05a17}
 <div style="border:2px dashed #c39a63;border-radius:8px;padding:19px 20px 21px;pointer-events:auto">
 <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.18em;color:#a2622c">STAGE 07 · END OF LEVEL</div><div style="font:700 10.5px Karla,sans-serif;letter-spacing:.1em;color:#9a7d5c">GMT-6</div></div>
 <div style="margin-top:9px;font:400 25px/1.12 'Bree Serif',serif;color:#3a1d0c">Let's build something</div>
-<div style="margin-top:11px;font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Five years in, backend depth in NestJS, Node.js and TypeScript, and the rare habit of designing the thing before building it. English advanced, Spanish native.</div>
+<div style="margin-top:11px;font:400 14.5px/1.55 Karla,sans-serif;color:#4d301c;text-wrap:pretty">Five years in, frontend-first with full-stack range across React, Node.js and TypeScript — comfortable owning DevOps with Kubernetes and CI/CD, and building AI-assisted workflows with Claude. The rare habit of designing the thing before building it. English advanced, Spanish native.</div>
 <div style="margin-top:15px;display:flex;flex-direction:column;gap:8px">
 <a href="mailto:duniel12@gmail.com" style="display:flex;align-items:center;justify-content:center;height:48px;background:#e0762a;border:2px solid #6d4526;border-radius:10px;box-shadow:0 5px 0 #6d4526;font:700 12px Karla,sans-serif;letter-spacing:.14em;color:#2b1408;text-decoration:none">duniel12@gmail.com</a>
 <div style="display:flex;gap:8px">
@@ -257,16 +263,16 @@ class Component extends DCLogic {
     const el=this.rootRef.current;
     this.targetT=0;
     const inCard=e=>e.target&&e.target.closest&&e.target.closest('[data-stage]');
-    const onWheel=e=>{ if(inCard(e)) return; e.preventDefault(); this.nudge((e.deltaY+e.deltaX)*0.00055); };
+    const onWheel=e=>{ if(inCard(e)) return; e.preventDefault(); this.nudge((e.deltaY+e.deltaX)*0.00032); };
     let down=false,lx=0;
     const onDown=e=>{ if(inCard(e)) return; down=true; lx=(e.touches?e.touches[0].clientX:e.clientX); el.style.cursor='grabbing'; };
-    const onMove=e=>{ if(!down)return; const x=(e.touches?e.touches[0].clientX:e.clientX); this.nudge((lx-x)*0.0016); lx=x; if(e.cancelable)e.preventDefault(); };
+    const onMove=e=>{ if(!down)return; const x=(e.touches?e.touches[0].clientX:e.clientX); this.nudge((lx-x)*0.00095); lx=x; if(e.cancelable)e.preventDefault(); };
     const onUp=()=>{ down=false; el.style.cursor='grab'; };
     const onKey=e=>{
       if(this._modalCtrl) return;
       const k=e.key;
-      if(k==='ArrowRight'||k==='d'){ this.nudge(.012); e.preventDefault(); }
-      else if(k==='ArrowLeft'||k==='a'){ this.nudge(-.012); e.preventDefault(); }
+      if(k==='ArrowRight'||k==='d'){ this.nudge(.007); e.preventDefault(); }
+      else if(k==='ArrowLeft'||k==='a'){ this.nudge(-.007); e.preventDefault(); }
       else if(k==='Home'){ this.goTo(0); } else if(k==='End'){ this.goTo(1); }
     };
     el.addEventListener('wheel',onWheel,{passive:false});
@@ -283,6 +289,8 @@ class Component extends DCLogic {
       window.removeEventListener('resize',this._onResize);
       if(this._onModalKey) window.removeEventListener('keydown',this._onModalKey);
       if(this._modalEl&&this._modalEl.parentNode) this._modalEl.parentNode.removeChild(this._modalEl);
+      if(this._peekEl&&this._peekEl.parentNode) this._peekEl.parentNode.removeChild(this._peekEl);
+      if(this._mobileBackdrop&&this._mobileBackdrop.parentNode) this._mobileBackdrop.parentNode.removeChild(this._mobileBackdrop);
     };
   }
 
@@ -826,6 +834,7 @@ class Component extends DCLogic {
 
     this.bindInput();
     this.initGalleries();
+    this.setupMobileCardUI();
     this._ro=new ResizeObserver(()=>this.resize()); this._ro.observe(host);
     this.resize();
 
@@ -842,6 +851,7 @@ class Component extends DCLogic {
     const w=host.clientWidth||innerWidth, h=host.clientHeight||innerHeight;
     this.renderer.setSize(w,h,false);
     this.camera.aspect=w/h; 
+    const wasNarrow=this.narrow;
     this.narrow=w<820;
     this.camera.fov=this.narrow?54:42;
     this.camera.updateProjectionMatrix();
@@ -849,6 +859,10 @@ class Component extends DCLogic {
     if(cards){
       if(this.narrow){ Object.assign(cards.style,{left:'12px',right:'12px',width:'auto',bottom:'16px',maxWidth:'none'}); }
       else { Object.assign(cards.style,{left:'26px',right:'auto',width:'395px',bottom:'26px',maxWidth:'calc(100% - 52px)'}); }
+    }
+    if(wasNarrow!==this.narrow){
+      this.closeMobileCard(); this.hidePeek(); this.active=-1;
+      if(!this.narrow) cards.querySelectorAll('[data-stage]').forEach(c=>{ c.style.opacity='0'; c.style.pointerEvents='none'; });
     }
   }
 
@@ -863,11 +877,65 @@ class Component extends DCLogic {
       c.style.transform=on?'translateY(0) rotate(-1.1deg)':'translateY(26px) rotate(-1.1deg)';
       c.style.zIndex=on?'2':'1';
     });
+    this.updateRailDots(i);
+    this.active=i;
+  }
+
+  updateRailDots(i){
+    if(!this.railDots) return;
     this.railDots.forEach((d,k)=>{
       d.style.background=k===i?'#e0762a':'#c9a276';
       d.style.transform=k===i?'scale(1.35)':'scale(1)';
     });
-    this.active=i;
+  }
+
+  // ---------- mobile: tap-to-open info instead of auto-showing cards ----------
+  setupMobileCardUI(){
+    if(this._peekEl) return;
+    const peek=document.createElement('button');
+    peek.type='button';
+    peek.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%);display:none;align-items:center;gap:8px;pointer-events:auto;background:#e0762a;border:2px solid #6d4526;border-radius:24px;padding:0 18px;height:46px;box-shadow:0 4px 0 #6d4526,0 10px 24px rgba(0,0,0,.4);font:700 12px Karla,sans-serif;letter-spacing:.06em;color:#2b1408;cursor:pointer;white-space:nowrap;z-index:60';
+    document.body.appendChild(peek);
+    peek.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); if(this._peekIdx!=null) this.openMobileCard(this._peekIdx); });
+    this._peekEl=peek;
+
+    const backdrop=document.createElement('div');
+    backdrop.style.cssText='position:fixed;inset:0;background:rgba(20,12,8,.72);z-index:50;display:none;pointer-events:auto';
+    this.overlayRef.current.appendChild(backdrop);
+    backdrop.addEventListener('click',()=>this.closeMobileCard());
+    this._mobileBackdrop=backdrop;
+
+    this.cardsRef.current.querySelectorAll('[data-stage]').forEach(card=>{
+      const close=document.createElement('button');
+      close.type='button'; close.className='dc-card-close'; close.setAttribute('aria-label','Close');
+      close.style.cssText='display:none;position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;border:2px solid #6d4526;background:#efe0c0;color:#6d4526;font:700 16px Karla,sans-serif;align-items:center;justify-content:center;padding:0;cursor:pointer;z-index:2;pointer-events:auto';
+      close.textContent='×';
+      close.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); this.closeMobileCard(); });
+      card.appendChild(close);
+    });
+  }
+  showPeek(i){
+    this._peekIdx=i;
+    if(this._peekEl&&this.STAGES){
+      this._peekEl.textContent='SEE INFO — '+this.STAGES[i].name;
+      this._peekEl.style.display=(this.mobileCardOpen==null)?'flex':'none';
+    }
+  }
+  hidePeek(){
+    this._peekIdx=null;
+    if(this._peekEl) this._peekEl.style.display='none';
+  }
+  openMobileCard(i){
+    this.mobileCardOpen=i;
+    if(this._peekEl) this._peekEl.style.display='none';
+    if(this._mobileBackdrop) this._mobileBackdrop.style.display='block';
+    this.cardsRef.current.querySelectorAll('[data-stage]').forEach((c,k)=>{ c.classList.toggle('mobile-open',k===i); });
+  }
+  closeMobileCard(){
+    if(this.cardsRef.current) this.cardsRef.current.querySelectorAll('[data-stage]').forEach(c=>c.classList.remove('mobile-open'));
+    this.mobileCardOpen=null;
+    if(this._mobileBackdrop) this._mobileBackdrop.style.display='none';
+    if(this._peekIdx!=null&&this._peekEl) this._peekEl.style.display='flex';
   }
 
   loop(){
@@ -875,10 +943,10 @@ class Component extends DCLogic {
     requestAnimationFrame(()=>this.loop());
     const THREE=this.THREE, dt=Math.min(.05,this.clock.getDelta()), t=this.clock.elapsedTime;
     const target=this.targetT||0;
-    this.progress+=(target-this.progress)*Math.min(1,dt*4.5);
+    this.progress+=(target-this.progress)*Math.min(1,dt*2.5);
     const tx=this.progress*this.worldEnd;
     const prev=this.charX;
-    this.charX+=(tx-this.charX)*Math.min(1,dt*5);
+    this.charX+=(tx-this.charX)*Math.min(1,dt*2.8);
     const vel=(this.charX-prev)/Math.max(dt,.001);
 
     const c=this.char, P=this.charParts;
@@ -895,7 +963,7 @@ class Component extends DCLogic {
     c.rotation.y=vel<-.4?-.35:(speed>.02?.35:.1);
 
     const camTargetX=this.charX+2.2;
-    this.camX+=(camTargetX-this.camX)*Math.min(1,dt*3.4);
+    this.camX+=(camTargetX-this.camX)*Math.min(1,dt*2.1);
     this.camera.position.set(this.camX, 3.3+Math.sin(t*.4)*.12, this.narrow?21:17);
     this.camera.lookAt(this.camX-(this.narrow?.6:3.6),3.1,0);
 
@@ -915,7 +983,14 @@ class Component extends DCLogic {
       });
       s.tick(t,near>.35);
     });
-    if(best<7.5) this.setActive(nearest); else this.setActive(-1);
+    if(this.narrow){
+      this.updateRailDots(best<7.5?nearest:-1);
+      if(this.mobileCardOpen==null){
+        if(best<7.5) this.showPeek(nearest); else this.hidePeek();
+      }
+    } else {
+      if(best<7.5) this.setActive(nearest); else this.setActive(-1);
+    }
 
     const hint=this.hintRef.current;
     if(hint) hint.style.opacity=this.touched?'0':'1';
